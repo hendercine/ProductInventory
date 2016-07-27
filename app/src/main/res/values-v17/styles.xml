@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="list_layout">
+                <item name="android:layout_alignParentBottom">true</item>
+                <item name="android:layout_alignParentRight">true</item>
+                <item name="android:layout_alignParentEnd">true</item>
+                <item name="android:layout_alignParentTop">true</item>
+                <item name="android:layout_toRightOf">@id/thumb_and_btn</item>
+                <item name="android:layout_toEndOf">@id/thumb_and_btn</item>
+                <item name="android:orientation">vertical</item>
+                <item name="android:paddingLeft">8dp</item>
+                <item name="android:paddingRight">8dp</item>
+
+        </style>
+</resources>
