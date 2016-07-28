@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button addItemBtn = (Button) findViewById(R.id.add_item_btn);
 
-
         listView = (ListView) findViewById(R.id.product_list);
         adapter = new ProductAdapter(MainActivity.this, productInventory);
         listView.setAdapter(adapter);
@@ -93,6 +92,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+//    @Override
+//    protected void onDestroy() {
+//        //Delete entire Database
+//        Log.d("Deleting: ", "Deleting entire Database");
+//        db.close();
+//        db.deleteDatabase();
+//        super.onDestroy();
+//    }
+
+
 //    public void buttonClicked(View view) {
 //        LayoutInflater inflater = getLayoutInflater();
 //        View alertLayout = inflater.inflate(R.layout.add_product, null);
@@ -128,3 +137,4 @@ public class MainActivity extends AppCompatActivity {
 //        dialog.show();
 //    }
 }
+

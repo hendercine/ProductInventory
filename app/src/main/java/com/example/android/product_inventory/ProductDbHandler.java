@@ -119,10 +119,10 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         String countQuery = "SELECT * FROM " + ProductContract.ProductEntry.TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
-
         // return count
-        return cursor.getCount();
+        return count;
     }
 
     // Updating a single product

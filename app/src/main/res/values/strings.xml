@@ -5,9 +5,9 @@
     <string name="add">Add Item</string>
     <string name="no_item">Tap ADD ITEM to start</string>
     <string name="product_name">Item: </string>
-    <string name="product_stock">Quantity: </string>
+    <string name="product_stock">In Stock: </string>
     <string name="product_price">Item price: </string>
-    <string name="item_sold">Items Sold: </string>
+    <string name="item_sold">Sold: </string>
     <string name="sup_email">Contact Info: </string>
     <string name="sell_btn">Make Sale</string>
     <string name="product_image_description">Product Image</string>

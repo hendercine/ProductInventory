@@ -21,12 +21,10 @@ import java.util.ArrayList;
 public class ProductAdapter extends ArrayAdapter<Product> {
 
     Context context;
-    int layoutResourceId;
     ArrayList<Product> products = new ArrayList<>();
 
-    public ProductAdapter(Context context, int layoutResourceId, ArrayList<Product> products) {
-        super(context, layoutResourceId, products);
-        this.layoutResourceId = layoutResourceId;
+    public ProductAdapter(Activity context, ArrayList<Product> products) {
+        super(context, 0, products);
         this.context = context;
         this.products = products;
     }
@@ -39,10 +37,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         View listItemView = convertView;
         ImageHolder holder;
 
-        if(listItemView == null)
-        {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            listItemView = inflater.inflate(layoutResourceId, parent, false);
+        if (listItemView == null) {
+            listItemView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.list_item, parent, false);
 
             holder = new ImageHolder();
             holder.imgIcon = (ImageView)listItemView.findViewById(R.id.image_thumb);

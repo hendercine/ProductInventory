@@ -6,6 +6,7 @@
     android:layout_height="@dimen/list_item_height"
     android:orientation="horizontal"
     android:padding="8dp"
+    android:descendantFocusability="blocksDescendants"
     tools:context="com.example.android.product_inventory.ListItem">
 
     <LinearLayout
