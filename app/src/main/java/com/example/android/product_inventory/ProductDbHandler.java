@@ -28,6 +28,7 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         final String COMMA_SEP = ",";
         final String INTEGER_TYPE = " INTEGER";
         final String FLOAT_TYPE = " REAL";
+        final String BYTE_TYPE = " BLOB";
         String CREATE_TABLE = "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME + "("
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY,"
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP

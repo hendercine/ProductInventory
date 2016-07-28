@@ -67,7 +67,7 @@ public class AddProduct extends AppCompatActivity {
                         pc.setName(prodName);
                         pc.setPrice(Float.parseFloat(prodPrice));
                         pc.setStock(Integer.parseInt(prodQty));
-                        pc.setImage(uri.toString());
+                        pc.setImage();
                         pc.setSales(0);
                         pc.setSupplier(email);
                         db.addProduct(pc);

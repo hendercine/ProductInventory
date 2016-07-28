@@ -49,9 +49,9 @@
                 android:text="@string/product_name" />
 
             <TextView
+                android:id="@+id/list_product_name"
                 style="@style/list_text_view"
-                android:layout_width="@dimen/list_text_view"
-                android:id="@+id/list_product_name" />
+                android:layout_width="@dimen/list_text_view" />
 
         </LinearLayout>
 
@@ -86,7 +86,7 @@
             <TextView
                 android:id="@+id/list_product_price"
                 style="@style/list_text_view"
-                android:layout_width="@dimen/list_text_view"/>
+                android:layout_width="@dimen/list_text_view" />
 
         </LinearLayout>
 
@@ -102,9 +102,9 @@
                 android:text="@string/item_sold" />
 
             <TextView
+                android:id="@+id/list_product_sold"
                 style="@style/list_text_view"
-                android:layout_width="@dimen/list_text_view"
-                android:id="@+id/list_product_sold" />
+                android:layout_width="@dimen/list_text_view" />
 
         </LinearLayout>
 

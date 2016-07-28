@@ -1,13 +1,18 @@
 package com.example.android.product_inventory;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +20,15 @@ import java.util.ArrayList;
  */
 public class ProductAdapter extends ArrayAdapter<Product> {
 
-    public ProductAdapter(Activity context, ArrayList<Product> products) {
-        super(context, 0, products);
+    Context context;
+    int layoutResourceId;
+    ArrayList<Product> products = new ArrayList<>();
+
+    public ProductAdapter(Context context, int layoutResourceId, ArrayList<Product> products) {
+        super(context, layoutResourceId, products);
+        this.layoutResourceId = layoutResourceId;
+        this.context = context;
+        this.products = products;
     }
 
     ProductDbHandler db = new ProductDbHandler(getContext());
@@ -25,9 +37,30 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+        ImageHolder holder;
+
+        if(listItemView == null)
+        {
+            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            listItemView = inflater.inflate(layoutResourceId, parent, false);
+
+            holder = new ImageHolder();
+            holder.imgIcon = (ImageView)listItemView.findViewById(R.id.image_thumb);
+            listItemView.setTag(holder);
         }
+        else
+        {
+            holder = (ImageHolder)listItemView.getTag();
+        }
+
+        Product picture = products.get(position);
+        //convert byte to bitmap take from contact class
+
+        byte[] outImage=picture.getImage();
+        ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
+        Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+        holder.imgIcon.setImageBitmap(theImage);
+
 
         final Product currentProduct = getItem(position);
 
@@ -66,4 +99,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         return listItemView;
     }
+
+static class ImageHolder
+{
+    ImageView imgIcon;
+}
 }
