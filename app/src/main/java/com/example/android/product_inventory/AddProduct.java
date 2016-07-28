@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -30,6 +31,8 @@ public class AddProduct extends AppCompatActivity {
     ProductDbHandler db = new ProductDbHandler(this);
     Uri uri;
     TextView errorMsg;
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    final byte imageInByte[] = stream.toByteArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,7 @@ public class AddProduct extends AppCompatActivity {
                         pc.setName(prodName);
                         pc.setPrice(Float.parseFloat(prodPrice));
                         pc.setStock(Integer.parseInt(prodQty));
-                        pc.setImage();
+                        pc.setImage(imageInByte);
                         pc.setSales(0);
                         pc.setSupplier(email);
                         db.addProduct(pc);
@@ -148,15 +151,15 @@ public class AddProduct extends AppCompatActivity {
             String[] projection = {MediaStore.Images.Media.DATA};
 
             Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+            assert cursor != null;
             cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(projection[0]);
-            String picturePath = cursor.getString(columnIndex); // returns null
 
             cursor.close();
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                // convert bitmap to byte
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
                 ImageView imageView = (ImageView) findViewById(R.id.image_view);
                 imageView.setImageBitmap(bitmap);

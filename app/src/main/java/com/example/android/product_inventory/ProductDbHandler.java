@@ -32,7 +32,7 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         String CREATE_TABLE = "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME + "("
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY,"
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + TEXT_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + BYTE_TYPE + COMMA_SEP
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + FLOAT_TYPE + COMMA_SEP
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_STOCK + INTEGER_TYPE + COMMA_SEP
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_SALES + INTEGER_TYPE + COMMA_SEP
@@ -48,9 +48,9 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void deleteDatabase() {
-        mContext.deleteDatabase(DATABASE_NAME);
-    }
+    /**
+     * CRUDD Operations (Create, Read, Update, Delete, DeleteDatabase)
+     */
 
     // Adding new product
     public void addProduct(Product product) {
@@ -62,6 +62,7 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_STOCK, product.getStock());
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_SALES, product.getSales());
         values.put(ProductContract.ProductEntry.COLUMN_SUPPLIER_CONTACT, product.getSupplier());
+
         // Inserting Row
         db.insert(ProductContract.ProductEntry.TABLE_NAME, null, values);
         db.close(); // Closing database connection
@@ -100,7 +101,7 @@ public class ProductDbHandler extends SQLiteOpenHelper {
                 Product product = new Product();
                 product.setId(Integer.parseInt(cursor.getString(0)));
                 product.setName(cursor.getString(1));
-                product.setImage(cursor.getString(2));
+                product.setImage(cursor.getBlob(2));
                 product.setPrice(cursor.getFloat(3));
                 product.setStock(Integer.parseInt(cursor.getString(4)));
                 product.setSales(Integer.parseInt(cursor.getString(5)));
@@ -118,18 +119,20 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         String countQuery = "SELECT * FROM " + ProductContract.ProductEntry.TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
-        int count = cursor.getCount();
         cursor.close();
+
         // return count
-        return count;
+        return cursor.getCount();
     }
 
-    // Updating a product
+    // Updating a single product
     public int updateProduct(Product product) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_STOCK, product.getStock());
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_SALES, product.getSales());
+
         // updating row
         return db.update(ProductContract.ProductEntry.TABLE_NAME,
                 values,
@@ -151,5 +154,11 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         db.delete(ProductContract.ProductEntry.TABLE_NAME, null, null);
         db.execSQL("delete  from " + ProductContract.ProductEntry.TABLE_NAME);
         db.close();
+    }
+
+    //Delete the database file
+    public void deleteDatabase() {
+
+        mContext.deleteDatabase(DATABASE_NAME);
     }
 }
