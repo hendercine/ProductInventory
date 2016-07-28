@@ -53,6 +53,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, AddProduct.class);
+
+                startActivityForResult(i, 0);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(listView.getVisibility() == View.GONE)
+        {
+            listView.setVisibility(View.VISIBLE);
+            textView.setVisibility(View.GONE);
+        }
+        adapter.clear();
+        productInventory.clear();
+        productInventory.addAll(db.getAllProducts());
+        adapter.notifyDataSetChanged();
+
+        if(productInventory != null)
+        {
+            if(productInventory.size() == 0)
+            {
+                listView.setVisibility(View.GONE);
+            }
+            else
+            {
+                listView.setVisibility(View.VISIBLE);
+            }
+        }
+        else
+        {
+            listView.setVisibility(View.GONE);
+        }
     }
 
     public void buttonClicked(View view) {

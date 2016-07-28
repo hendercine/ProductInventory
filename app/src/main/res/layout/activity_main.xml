@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_default_padding"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.android.product_inventory.MainActivity">
 
     <LinearLayout
@@ -18,7 +19,7 @@
             style="@style/add_item_text"
             android:visibility="visible"
             android:id="@+id/no_product"
-            android:text="@string/noItem" />
+            android:text="@string/no_item" />
 
         <Button
             style="@style/add_item_btn"
@@ -33,6 +34,9 @@
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="true"
         android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:divider="@color/colorAccent"
+        android:dividerHeight="1dp"
         android:visibility="visible" />
 
 </LinearLayout>

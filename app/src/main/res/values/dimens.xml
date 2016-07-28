@@ -12,7 +12,7 @@
 
     <!-- Dimensions of list item thumbnails and buttons -->
     <dimen name="thumb_height">100dp</dimen>
-    <dimen name="thumb_width">160dp</dimen>
+    <dimen name="thumb_width">100dp</dimen>
 
     <!-- Dimensions of list item text -->
     <dimen name="list_text_view">0dp</dimen>

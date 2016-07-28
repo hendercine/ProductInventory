@@ -1,9 +1,11 @@
 package com.example.android.product_inventory;
 
+import java.io.Serializable;
+
 /**
  * Created by Hendercine on 7/25/16.
  */
-public class Product {
+public class Product implements Serializable {
     private int id;
     private String name;
     private String image;

@@ -15,6 +15,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ListItem"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
+            android:name=".AddProduct"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/add_product_title"
+            android:parentActivityName=".MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.product_inventory.MainActivity" />
+        </activity>
+
+        <activity android:name=".ProductDetails"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/product_detail_title"
+            android:parentActivityName=".MainActivity"
+            >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.product_inventory.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

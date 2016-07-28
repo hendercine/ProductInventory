@@ -24,14 +24,18 @@ public class ProductDbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        final String TEXT_TYPE = " TEXT";
+        final String COMMA_SEP = ",";
+        final String INTEGER_TYPE = " INTEGER";
+        final String FLOAT_TYPE = " REAL";
         String CREATE_TABLE = "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME + "("
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY,"
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + " TEXT,"
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + " TEXT"
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + " TEXT"
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_STOCK + " TEXT"
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_SALES + " TEXT"
-                + ProductContract.ProductEntry.COLUMN_SUPPLIER_CONTACT + " TEXT" + ")";
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + TEXT_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + FLOAT_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_STOCK + INTEGER_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_SALES + INTEGER_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_SUPPLIER_CONTACT + TEXT_TYPE + ")";
         db.execSQL(CREATE_TABLE);
     }
 

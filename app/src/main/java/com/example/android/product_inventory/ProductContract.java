@@ -13,14 +13,14 @@ public class ProductContract {
 
     public class ProductEntry implements BaseColumns {
         // Table name
-        public static final String TABLE_NAME = "Inventory Info";
+        public static final String TABLE_NAME = "inventoryInfo";
         // Table Columns names
-        public static final String COLUMN_PRODUCT_ID = "Product Id";
-        public static final String COLUMN_PRODUCT_NAME = "Product Name";
-        public static final String COLUMN_PRODUCT_IMAGE = "Product Pic";
-        public static final String COLUMN_PRODUCT_PRICE = "Price";
-        public static final String COLUMN_PRODUCT_STOCK = "Available Stock";
-        public static final String COLUMN_PRODUCT_SALES = "Sales";
-        public static final String COLUMN_SUPPLIER_CONTACT = "Supplier Contact Info";
+        public static final String COLUMN_PRODUCT_ID = "productId";
+        public static final String COLUMN_PRODUCT_NAME = "productName";
+        public static final String COLUMN_PRODUCT_IMAGE = "productPic";
+        public static final String COLUMN_PRODUCT_PRICE = "price";
+        public static final String COLUMN_PRODUCT_STOCK = "availableStock";
+        public static final String COLUMN_PRODUCT_SALES = "sales";
+        public static final String COLUMN_SUPPLIER_CONTACT = "supplierContactInfo";
     }
 }

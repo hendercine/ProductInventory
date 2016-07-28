@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,40 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        Product currentProduct = getItem(position);
+        final Product currentProduct = getItem(position);
+
+        Button btnBuy = (Button) listItemView.findViewById(R.id.list_order_prod);
+
+        TextView tvProductName = (TextView) listItemView.findViewById(R.id.list_product_name);
+        tvProductName.setText(currentProduct.getName());
+
+        final TextView tvProductQty = (TextView) listItemView.findViewById(R.id.list_product_stock);
+        tvProductQty.setText(Integer.toString(currentProduct.getStock()));
+
+        TextView tvProductPrice = (TextView) listItemView.findViewById(R.id.list_product_price);
+        tvProductPrice.setText("$" + Float.toString(currentProduct.getPrice()));
+
+        final TextView tvProductSold = (TextView) listItemView.findViewById(R.id.list_product_sold);
+        tvProductSold.setText(Integer.toString(currentProduct.getSales()));
+
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int qty = Integer.parseInt(tvProductQty.getText().toString());
+                int sold = Integer.parseInt(tvProductSold.getText().toString());
+
+                if (qty > 0) {
+                    qty--;
+                    sold++;
+                    currentProduct.setSales(qty);
+                    currentProduct.setStock(sold);
+                    tvProductQty.setText(Integer.toString(qty));
+                    tvProductSold.setText(Integer.toString(sold));
+                    db.updateProduct(currentProduct);
+                }
+
+            }
+        });
 
         return listItemView;
     }

@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">Product Inventory</string>
-    <string name="addProductTitle">Add Product</string>
-    <string name="productDetailTitle">Product</string>
+    <string name="add_product_title">Add Product</string>
+    <string name="product_detail_title">Product</string>
     <string name="add">Add Item</string>
-    <string name="noItem">Tap ADD ITEM to start</string>
-    <string name="productName">Item: </string>
-    <string name="productStock">Quantity: </string>
-    <string name="productPrice">Item price: $</string>
-    <string name="itemSold">Item Sales: $</string>
-    <string name="supEmail">Contact Info: </string>
-    <string name="order_btn">Order</string>
+    <string name="no_item">Tap ADD ITEM to start</string>
+    <string name="product_name">Item: </string>
+    <string name="product_stock">Quantity: </string>
+    <string name="product_price">Item price: </string>
+    <string name="item_sold">Items Sold: </string>
+    <string name="sup_email">Contact Info: </string>
+    <string name="sell_btn">Make Sale</string>
     <string name="product_image_description">Product Image</string>
     <string name="add_product_name_hint">Product name here</string>
     <string name="add_product_price_hint">Product Price</string>

@@ -20,7 +20,7 @@
 
             <TextView
                 style="@style/add_product_text_view"
-                android:text="@string/productName" />
+                android:text="@string/product_name" />
 
             <EditText
                 android:id="@+id/edit_item_name"
@@ -36,7 +36,7 @@
 
             <TextView
                 style="@style/add_product_text_view"
-                android:text="@string/productPrice" />
+                android:text="@string/product_price" />
 
             <EditText
                 android:id="@+id/edit_item_price"
@@ -51,7 +51,7 @@
 
             <TextView
                 style="@style/add_product_text_view"
-                android:text="@string/productStock" />
+                android:text="@string/product_stock" />
 
             <EditText
                 android:id="@+id/edit_stock"
@@ -66,7 +66,7 @@
 
             <TextView
                 style="@style/add_product_text_view"
-                android:text="@string/supEmail" />
+                android:text="@string/sup_email" />
 
             <EditText
                 android:id="@+id/edit_sup_contact"
