@@ -1,13 +1,11 @@
 package com.example.android.product_inventory;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 public class ProductAdapter extends ArrayAdapter<Product> {
 
     ArrayList<Product> products = new ArrayList<>();
-    ProductImage pi = new ProductImage();
 
     public ProductAdapter(Activity context, ArrayList<Product> products) {
         super(context, 0, products);
@@ -51,9 +48,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         final TextView tvProductSold = (TextView) listItemView.findViewById(R.id.list_product_sold);
         tvProductSold.setText(Integer.toString(currentProduct.getSales()));
-
-        ImageView listThumb = (ImageView) listItemView.findViewById(R.id.image_thumb);
-        listThumb.setImageBitmap(pi.getBitmapFromUri(Uri.parse(currentProduct.getImage())));
 
         btnSell.setOnClickListener(new View.OnClickListener() {
             @Override

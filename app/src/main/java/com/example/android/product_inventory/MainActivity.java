@@ -1,8 +1,14 @@
 package com.example.android.product_inventory;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +24,39 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private ProductAdapter adapter;
     private ProductDbHandler db = new ProductDbHandler(this);
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_item, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.delete_database:
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle(R.string.menu_alert_title)
+                        .setMessage(R.string.menu_delete_warning)
+                        .setPositiveButton(R.string.menu_confirm_btn, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Delete entire Database
+                                db.close();
+                                db.deleteDatabase();
+                            }
+                        })
+                        .setNegativeButton(R.string.menu_cancel_btn, null)
+                        .create();
+                dialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,15 +130,6 @@ public class MainActivity extends AppCompatActivity {
             listView.setVisibility(View.GONE);
         }
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        //Delete entire Database
-//        Log.d("Deleting: ", "Deleting entire Database");
-//        db.close();
-//        db.deleteDatabase();
-//        super.onDestroy();
-//    }
 
 }
 
