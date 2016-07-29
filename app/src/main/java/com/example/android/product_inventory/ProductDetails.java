@@ -35,7 +35,9 @@ public class ProductDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         TextView textViewProductName = (TextView) findViewById(R.id.textViewProdName2);
         TextView textViewProductPrice = (TextView) findViewById(R.id.textViewProdPrice2);
         final TextView textViewProductQty = (TextView) findViewById(R.id.textViewProdQty2);
