@@ -28,11 +28,10 @@ public class ProductDbHandler extends SQLiteOpenHelper {
         final String COMMA_SEP = ",";
         final String INTEGER_TYPE = " INTEGER";
         final String FLOAT_TYPE = " REAL";
-        final String BYTE_TYPE = " BLOB";
         String CREATE_TABLE = "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME + "("
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY,"
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + BYTE_TYPE + COMMA_SEP
+                + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + TEXT_TYPE + COMMA_SEP
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + FLOAT_TYPE + COMMA_SEP
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_STOCK + INTEGER_TYPE + COMMA_SEP
                 + ProductContract.ProductEntry.COLUMN_PRODUCT_SALES + INTEGER_TYPE + COMMA_SEP
@@ -101,7 +100,7 @@ public class ProductDbHandler extends SQLiteOpenHelper {
                 Product product = new Product();
                 product.setId(Integer.parseInt(cursor.getString(0)));
                 product.setName(cursor.getString(1));
-                product.setImage(cursor.getBlob(2));
+                product.setImage(cursor.getString(2));
                 product.setPrice(cursor.getFloat(3));
                 product.setStock(Integer.parseInt(cursor.getString(4)));
                 product.setSales(Integer.parseInt(cursor.getString(5)));

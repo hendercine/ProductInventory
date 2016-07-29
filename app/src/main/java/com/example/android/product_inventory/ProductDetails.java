@@ -10,6 +10,7 @@ import android.os.ParcelFileDescriptor;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
@@ -30,9 +30,6 @@ public class ProductDetails extends AppCompatActivity {
     ProductValidator pv = new ProductValidator();
     ProductDbHandler db = new ProductDbHandler(this);
     Product pc;
-    Uri uri;
-    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-    final byte imageInByte[] = stream.toByteArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +47,7 @@ public class ProductDetails extends AppCompatActivity {
         textViewProductPrice.setText(Float.toString(pc.getPrice()));
         textViewProductQty.setText(Integer.toString(pc.getStock()));
         textViewProductSold.setText(Integer.toString(pc.getSales()));
-        try {
-            iv.setImageBitmap(getBitmapFromUri(Uri.parse(String.valueOf(pc.getImage()))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        iv.setImageBitmap(getBitmapFromUri(Uri.parse(pc.getImage())));
 
         final Button order = (Button) findViewById(R.id.btnOrder);
         Button deleteProd = (Button) findViewById(R.id.btnDeletProd);
@@ -158,8 +151,6 @@ public class ProductDetails extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                String email = pc.getSupplier();
-
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setData(Uri.parse("mailto:")); // only email apps should handle this
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{pc.getSupplier()});
@@ -180,39 +171,30 @@ public class ProductDetails extends AppCompatActivity {
         editQtyError.setVisibility(View.GONE);
     }
 
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
-        assert parcelFileDescriptor != null;
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
-        return image;
+    private Bitmap getBitmapFromUri(Uri uri) {
+        ParcelFileDescriptor parcelFileDescriptor = null;
+        try {
+            parcelFileDescriptor =
+                    getContentResolver().openFileDescriptor(uri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            parcelFileDescriptor.close();
+            return image;
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to load image.", e);
+            return null;
+        } finally {
+            try {
+                if (parcelFileDescriptor != null) {
+                    parcelFileDescriptor.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(TAG, "Error closing ParcelFile Descriptor");
+            }
+        }
     }
 
-//    private Bitmap getBitmapFromMediaStore(Intent data) {
-//
-//            uri = data.getData();
-//            String[] projection = {MediaStore.Images.Media.DATA};
-//
-//            Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-//            assert cursor != null;
-//            cursor.moveToFirst();
-//
-//            cursor.close();
-//
-//        Bitmap bitmap = null;
-//        try {
-//            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        // convert bitmap to byte
-//        if (bitmap != null) {
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//        }
-//        return bitmap;
-//        }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

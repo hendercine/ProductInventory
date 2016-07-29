@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private int id;
     private String name;
-    private byte[] image;
+    private String image;
     private float price;
     private int stock;
     private int sales;
@@ -17,7 +17,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, byte[] image, float price, int stock, int sales, String supplier) {
+    public Product(int id, String name, String image, float price, int stock, int sales, String supplier) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -35,9 +35,7 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+    public void setImage(String image) { this.image = image; }
 
     public void setPrice(float price) {
         this.price = price;
@@ -63,7 +61,7 @@ public class Product implements Serializable {
         return name;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 

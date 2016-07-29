@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Product> productInventory = new ArrayList<Product>();
+    private ArrayList<Product> productInventory = new ArrayList<>();
     private ListView listView;
     private TextView textView;
     private ProductAdapter adapter;
@@ -101,40 +101,5 @@ public class MainActivity extends AppCompatActivity {
 //        super.onDestroy();
 //    }
 
-
-//    public void buttonClicked(View view) {
-//        LayoutInflater inflater = getLayoutInflater();
-//        View alertLayout = inflater.inflate(R.layout.add_product, null);
-//        final EditText setItemName = (EditText) alertLayout.findViewById(R.id.edit_item_name);
-//        final EditText setItemPrice = (EditText) alertLayout.findViewById(R.id.edit_item_price);
-//        final EditText setItemStock = (EditText) alertLayout.findViewById(R.id.edit_stock);
-//
-//        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-//        alert.setTitle("Add New Product");
-//        // this is set the view from XML inside AlertDialog
-//        alert.setView(alertLayout);
-//        // disallow cancel of AlertDialog on click of back button and outside touch
-//        alert.setCancelable(false);
-//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(getBaseContext(), "No items added", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                String itemName = setItemName.getText().toString();
-//                String itemPrice = setItemPrice.getText().toString();
-//                String itemQty = setItemStock.getText().toString();
-//                Toast.makeText(getBaseContext(), itemQty + " " + itemName + ", costing $" + itemPrice + ", added", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        AlertDialog dialog = alert.create();
-//        dialog.show();
-//    }
 }
 
