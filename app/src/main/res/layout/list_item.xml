@@ -25,7 +25,7 @@
             tools:src="@drawable/place_holder" />
 
         <Button
-            android:id="@+id/list_order_prod"
+            android:id="@+id/list_sell_btn"
             android:layout_width="@dimen/thumb_width"
             android:layout_height="48dp"
             android:text="@string/sell_btn" />

@@ -61,7 +61,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         final Product currentProduct = getItem(position);
 
-        Button btnBuy = (Button) listItemView.findViewById(R.id.list_order_prod);
+        Button btnSell = (Button) listItemView.findViewById(R.id.list_sell_btn);
 
         TextView tvProductName = (TextView) listItemView.findViewById(R.id.list_product_name);
         tvProductName.setText(currentProduct.getName());
@@ -75,7 +75,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         final TextView tvProductSold = (TextView) listItemView.findViewById(R.id.list_product_sold);
         tvProductSold.setText(Integer.toString(currentProduct.getSales()));
 
-        btnBuy.setOnClickListener(new View.OnClickListener() {
+        btnSell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int qty = Integer.parseInt(tvProductQty.getText().toString());
