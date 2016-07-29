@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,9 +41,13 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.menu_confirm_btn, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                listView = (ListView) findViewById(R.id.product_list);
                                 //Delete entire Database
                                 db.close();
                                 db.deleteDatabase();
+                                adapter.notifyDataSetChanged();
+                                listView.setVisibility(View.GONE);
+
                             }
                         })
                         .setNegativeButton(R.string.menu_cancel_btn, null)

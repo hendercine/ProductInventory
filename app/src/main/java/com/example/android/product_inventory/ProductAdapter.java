@@ -1,6 +1,7 @@
 package com.example.android.product_inventory;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +58,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
                 if (stock > 0) {
                     stock--;
+                    Log.d("btnSell stock: ", String.valueOf(stock));
                     sold++;
-                    currentProduct.setSales(stock);
-                    currentProduct.setStock(sold);
+                    Log.d("btnSell sales: ", String.valueOf(sold));
+                    currentProduct.setSales(sold);
+                    currentProduct.setStock(stock);
                     tvInStock.setText(Integer.toString(stock));
                     tvProductSold.setText(Integer.toString(sold));
                     db.updateProduct(currentProduct);

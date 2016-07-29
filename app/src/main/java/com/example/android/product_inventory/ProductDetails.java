@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -32,38 +34,48 @@ public class ProductDetails extends AppCompatActivity {
     Product pc;
 
     @Override
+    public void setActionBar(Toolbar toolbar) {
+        super.setActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setTitle(R.string.product_detail_title);
+        actionBar.show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        TextView textViewProductName = (TextView) findViewById(R.id.textViewProdName2);
-        TextView textViewProductPrice = (TextView) findViewById(R.id.textViewProdPrice2);
-        final TextView textViewProductQty = (TextView) findViewById(R.id.textViewProdQty2);
+        TextView textViewProductName = (TextView) findViewById(R.id.detail_prod_name_output);
+        TextView textViewProductPrice = (TextView) findViewById(R.id.detail_prod_price_output);
+        final TextView textViewProductQty = (TextView) findViewById(R.id.detail_prod_qty_output);
         TextView textViewProductSold = (TextView) findViewById(R.id.textViewProdSold2);
-        ImageView iv = (ImageView) findViewById(R.id.imageViewDetails);
+        ImageView iv = (ImageView) findViewById(R.id.detail_image_view);
 
         pc = (Product) getIntent().getSerializableExtra("class");
         textViewProductName.setText(pc.getName());
-        textViewProductPrice.setText(Float.toString(pc.getPrice()));
+        textViewProductPrice.setText("$" + Float.toString(pc.getPrice()));
         textViewProductQty.setText(Integer.toString(pc.getStock()));
         textViewProductSold.setText(Integer.toString(pc.getSales()));
         iv.setImageBitmap(getBitmapFromUri(Uri.parse(pc.getImage())));
 
-        final Button order = (Button) findViewById(R.id.btnOrder);
-        Button deleteProd = (Button) findViewById(R.id.btnDeletProd);
-        Button adjQty = (Button) findViewById(R.id.btnAdjustQty);
+        final Button order = (Button) findViewById(R.id.detail_btn_order);
+        Button deleteProd = (Button) findViewById(R.id.detail_btn_delete_prod);
+        Button adjQty = (Button) findViewById(R.id.detail_btn_adjust_qty);
 
-        final TextView tvModQty = (TextView) findViewById(R.id.textVieModQty);
-        final LinearLayout adjQty1 = (LinearLayout) findViewById(R.id.adjQty1);
-        final LinearLayout adjQty2 = (LinearLayout) findViewById(R.id.adjQty2);
+        final TextView tvModQty = (TextView) findViewById(R.id.detail_mod_qty);
+        final LinearLayout adjQty1 = (LinearLayout) findViewById(R.id.detail_adj_qty_1);
+        final LinearLayout adjQty2 = (LinearLayout) findViewById(R.id.detail_adj_qty_2);
         final Button btnDoneQty = (Button) findViewById(R.id.done);
         final Button btnCancelQty = (Button) findViewById(R.id.cancel);
         final Button btnUpQty = (Button) findViewById(R.id.up);
         final Button btnDownQty = (Button) findViewById(R.id.down);
-        final EditText editQty = (EditText) findViewById(R.id.editQty);
-        final TextView editQtyError = (TextView) findViewById(R.id.editQtyError);
+        final EditText editQty = (EditText) findViewById(R.id.detail_edit_qty);
+        final TextView editQtyError = (TextView) findViewById(R.id.detail_edit_qty_error);
 
         btnDownQty.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
